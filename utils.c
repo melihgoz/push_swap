@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: megoz <megoz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 17:59:21 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/19 17:59:21 by marvin           ###   ########.fr       */
+/*   Created: 2025/02/24 00:42:25 by megoz             #+#    #+#             */
+/*   Updated: 2025/02/24 00:42:25 by megoz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include "push_swap.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*ptr;
+	size_t	len;
+
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	ptr = malloc(sizeof(char) * len);
+	if (ptr == NULL)
+		return (NULL);
+	ptr[len - 1] = '\0';
+	ft_memcpy(ptr, s1, ft_strlen(s1));
+	ft_memcpy(ptr + ft_strlen(s1), s2, ft_strlen(s2));
+	return (ptr);
+}
 
 size_t	count_word(const char *p, char c)
 {
@@ -117,14 +134,18 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int	execution(int **list)
+int	execution(int *list_a, int argc, int *list_b)
 {	
+	int i;
 	
-	int i = 0;
-	while ((*list)[i])
+	i = 0;
+	while (i < argc - 1)
 	{
-		printf("31 %d\n", (*list)[i]);
+		printf("TESTTEST\n");
+		write(1, &list_a[i], 1);
 		i++;
 	}
+	is_three(list_a, argc);
+	is_raddix(list_a, list_b, argc);
 	return 0;
 }

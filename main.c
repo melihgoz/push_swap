@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: megoz <megoz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 13:37:13 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/17 13:37:13 by marvin           ###   ########.fr       */
+/*   Created: 2025/02/24 00:42:07 by megoz             #+#    #+#             */
+/*   Updated: 2025/02/24 00:42:07 by megoz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		ft_atoi(const char *str)
 {
+	// error caseleri düzeltilecek
 	int neg;
 	int i;
 	int num;
@@ -94,34 +95,42 @@ void	initial(int argc, char **argv)
 	char	**pointer;
 	t_stack *stack;
 
+	i = 1;
+	stack = malloc(sizeof(stack));
+	if (!stack)
+	return ;
+	// if (argc == 2)
+	// {
+	// 	elements = count_word(argv[1], ' ');
+	// 	argc = elements;
+	// }
+	stack->stack_a = (int*)malloc((argc - 1) * sizeof(int));
+	ft_strjoin(argv, stack->stack_a);
+	ft_split();
 
-	i = 0;
-    elements = element_counter(argv[1]);
-	stack = malloc(sizeof(t_stack));
-	stack->stack_a = (int*)malloc((elements + 1) * sizeof(int));
-	if (!stack->stack_a)
-		return ;
-	pointer = ft_split(argv[1], ' ');
-
-	while (i < elements)
-	{
-		stack->stack_a[i] = ft_atoi(pointer[i]);
-		i++;
-	}
-	stack->stack_a[i] = '\0';
-	i = 0;
-	while (stack->stack_a[i] != '\0')
-	{
-		printf("%d\n", stack->stack_a[i]);
-		i++;
-	}
+	// if (!stack->stack_a)
+	// 	return ;
+	// while (i < argc)
+	// {
+	// 	stack->stack_a[i - 1] = ft_atoi(argv[i]);
+	// 	i++;
+	// }
+	// execution(stack->stack_a, argc, stack->stack_b);
 }
 
 int main(int argc, char **argv)
 {
     if (argc < 2)
-        return (0);
-	
-    initial(argc, argv);
+         return (0);
+	// int	i = 0;
+	// int	*test = [20, 10];
+	// sa(test);
+	// while (test[i] != '\0')
+	// {
+	// 	printf("%d.eleman = %d", i, test[i]);
+	// 	i++;
+	// }
+	initial(argc, argv);
+	ft_putstr("\n");
     return (0);
 }
