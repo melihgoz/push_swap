@@ -12,36 +12,36 @@
 
 #include "push_swap.h"
 
-void    is_three(int *list_a, int argc)
-{
-    int i;
+// void    is_three(t_stack *a, int argc)
+// {
+//     int i;
 
-    i = 0;
-    if (argc == 4)
-    {
-        if (list_a[i] > list_a[i + 1] && list_a[i] < list_a[i + 2])
-            sa(list_a);
-        else if (list_a[i] > list_a[i + 1] && list_a[i] > list_a[i + 2] && list_a[i + 1] < list_a[i + 2])
-            ra(list_a);
-        else if (list_a[i] > list_a[i + 1] && list_a[i] > list_a[i + 2] && list_a[i + 1] > list_a[i + 2])
-        {
-            ra(list_a);
-            sa(list_a);
-        }
-        else if (list_a[i] < list_a[i + 1] && list_a[i] > list_a[i + 2])
-            rra(list_a);
-        else if (list_a[i] < list_a[i + 1] && list_a[i] < list_a[i + 2] && list_a[i + 1] > list_a[i + 2])
-        {
-            sa(list_a);
-            ra(list_a);
-        }
-        else if (list_a[i] < list_a[i + 1] && list_a[i] < list_a[i + 2] && list_a[i + 1] < list_a[i + 2])
-        {
-            rra(list_a);
-            sa(list_a);
-        }
-    }
-}
+//     i = 0;
+//     if (argc == 4)
+//     {
+//         if (list_a[i] > list_a[i + 1] && list_a[i] < list_a[i + 2])
+//             sa(list_a);
+//         else if (list_a[i] > list_a[i + 1] && list_a[i] > list_a[i + 2] && list_a[i + 1] < list_a[i + 2])
+//             ra(list_a);
+//         else if (list_a[i] > list_a[i + 1] && list_a[i] > list_a[i + 2] && list_a[i + 1] > list_a[i + 2])
+//         {
+//             ra(list_a);
+//             sa(list_a);
+//         }
+//         else if (list_a[i] < list_a[i + 1] && list_a[i] > list_a[i + 2])
+//             rra(list_a);
+//         else if (list_a[i] < list_a[i + 1] && list_a[i] < list_a[i + 2] && list_a[i + 1] > list_a[i + 2])
+//         {
+//             sa(list_a);
+//             ra(list_a);
+//         }
+//         else if (list_a[i] < list_a[i + 1] && list_a[i] < list_a[i + 2] && list_a[i + 1] < list_a[i + 2])
+//         {
+//             rra(list_a);
+//             sa(list_a);
+//         }
+//     }
+// }
 
 // Helper function to find the index of the smallest element in stack a
 int find_min_index(int *a)
@@ -57,12 +57,22 @@ int find_min_index(int *a)
 
 void    is_raddix(int *list_a, int *list_b, int argc)
 {
-    printf("is_raddix çalışıyor \n");
     //sağdaki bitleri hesapla ve sağdan sırala
     //A DA 1
     //B DE 0 OLACAK ŞEKİLDE HER ADIMDA DEVAM ET
     //BASAMAK BASAMAK İLERLEME METHODU
     // bitleri putnbrbase ile hesapla sonra itoa ile asciiye çevir sonrasında string karşılaştırması ile sırala
+    // sayıların sıralarını hesaplayıp sırasına göre her birine flag ataması yaparak sıralama işlemini gerçekleştir
+    char	**binary;
+    int		i;
+
+    i = 0;
+    while (i < argc)
+    {
+
+        
+    }
+        // binary[i] = ft_putnbr_base(list_a[i++], "01");
 
 
 

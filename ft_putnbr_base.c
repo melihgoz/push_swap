@@ -39,26 +39,14 @@ int		check_base_condition(char *base)
 	return (1);
 }
 
-void	ft_putmaxneg_base(int nbr, char *base)
-{
-	if (nbr <= (-1 * ft_strlen(base)))
-	{
-		ft_putmaxneg_base(nbr / ft_strlen(base), base);
-		ft_putmaxneg_base(nbr % ft_strlen(base), base);
-	}
-	else
-		ft_putchar(base[-nbr]);
-}
-
-void	ft_putnbr_base(int nbr, char *base)
+int	ft_putnbr_base(int nbr, char *base)
 {
 	if (check_base_condition(base))
 	{
 		if (nbr == -2147483648)
 		{
 			ft_putchar('-');
-			ft_putmaxneg_base(nbr, base);
-			return ;
+			return 0;
 		}
 		if (nbr < 0)
 		{
@@ -66,11 +54,8 @@ void	ft_putnbr_base(int nbr, char *base)
 			nbr = -nbr;
 		}
 		if (nbr >= ft_strlen(base))
-		{
-			ft_putnbr_base(nbr / ft_strlen(base), base);
-			ft_putnbr_base(nbr % ft_strlen(base), base);
-		}
+			return (10 * ft_putnbr_base(nbr / ft_strlen(base), base) + ft_putnbr_base(nbr % ft_strlen(base), base));
 		else
-			ft_putchar(base[nbr]);
+			return (base[nbr] - 48);
 	}
 }

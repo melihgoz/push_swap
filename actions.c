@@ -3,178 +3,180 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: megoz <megoz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: megoz <megoz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 00:41:56 by megoz             #+#    #+#             */
-/*   Updated: 2025/03/09 16:48:57 by megoz            ###   ########.fr       */
+/*   Updated: 2025/03/10 20:29:50 by megoz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void   sa(int *a)
-{
-    int temp;
-
-    if (a[0] > 1)
-    {
-        temp = a[1];
-        a[1] = a[0];
-        a[0] = temp;
-    }
-    ft_putstr("sa\n");
-}
-
-void   sb(int *a, int *b)
-{
-    int temp;
-
-    if (b[0] > 1)
-    {
-        temp = b[1];
-        b[1] = b[0];
-        b[0] = temp;
-    }
-    ft_putstr("sb\n");
-}
-
-void   ss(int *a, int *b)
-{
-    sa(a);
-    sb(a, b);
-    ft_putstr("ss\n");
-}
-
-void   pa(int *a, int *b)
+void   popop(t_stack *a)
 {
     int i;
+    int j;
 
-    if (b[0] > 0)
+    j = 0;
+    i = a->elem_count;
+    while (i > 1)
     {
-        i = a[0];
-        while (i > 0)
-        {
-            a[i + 1] = a[i];
-            i--;
-        }
-        a[1] = b[1];
-        a[0]++;
-        i = 1;
-        while (i < b[0])
-        {
-            b[i] = b[i + 1];
-            i++;
-        }
-        b[0]--;
+        a->array[j] = a->array[j + 1];
+        i--;
+        j++;
     }
-    ft_putstr("pa\n");
+    a->elem_count--;
 }
 
-void    pb(int *a, int *b)
-{
-    int i;
 
-    if (a[0] > 0)
-    {
-        i = b[0];
-        while (i > 0)
+// void   sa(int *a)
+// {
+//     int temp;
+
+//     if (a[0] > 1)
+//     {
+//         temp = a[1];
+//         a[1] = a[0];
+//         a[0] = temp;
+//     }
+//     ft_putstr("sa\n");
+// }
+
+// void   sb(int *a, int *b)
+// {
+//     int temp;
+
+//     if (b[0] > 1)
+//     {
+//         temp = b[1];
+//         b[1] = b[0];
+//         b[0] = temp;
+//     }
+//     ft_putstr("sb\n");
+// }
+
+// void   ss(int *a, int *b)
+// {
+//     sa(a);
+//     sb(a, b);
+//     ft_putstr("ss\n");
+// }
+
+void    pa(t_stack *a, t_stack *b)
+{
+    if (b->elem_count > 0)
         {
-            b[i + 1] = b[i];
-            i--;
+            int i;
+            
+            i = a->elem_count;
+            while (i > 0)
+            {
+                a->array[i] = a->array[i - 1];
+				i--;
+            }
+            a->array[0] = b->array[0];
+            a->elem_count++;
         }
-        b[1] = a[1];
-        b[0]++;
-        i = 1;
-        while (i < a[0])
-        {
-            a[i] = a[i + 1];
-            i++;
-        }
-        a[0]--;
-    }
-    ft_putstr("pb\n");
+        popop(b);
+        ft_putstr("pa\n");
 }
 
-void    ra(int *a)
-{
-    int i;
-    int temp;
 
-    if (a[0] > 1)
-    {
-        temp = a[1];
-        i = 1;
-        while (i < a[0])
+void    pb(t_stack *a, t_stack *b)
+{
+    if (a->elem_count > 0)
         {
-            a[i] = a[i + 1];
-            i++;
+            int i;
+            
+            i = b->elem_count;
+            while (i > 0)
+            {
+                b->array[i] = b->array[i - 1];
+				i--;
+            }
+            b->array[0] = a->array[0];
+            b->elem_count++;
         }
-        a[a[0]] = temp;
+        popop(a);
+        ft_putstr("pb\n");
+		for (int y = 0; y < b->elem_count; y++)
+            printf("B-NIN %d. ELEMANI = %d\n", y, b->array[y]);
+}
+
+void    ra(t_stack *a)
+{
+    int tmp;
+    int i;
+
+    i = 0;
+    tmp = a->array[0];
+    while (i < a->elem_count)
+    {
+        a->array[i] = a->array[i + 1];
+        i++;
     }
+    a->array[a->elem_count - 1] = tmp;
     ft_putstr("ra\n");
 }
 
-void    rb(int *a, int *b)
+void    rb(t_stack *b)
 {
+    int tmp;
     int i;
-    int temp;
 
-    if (b[0] > 1)
+    i = 0;
+    tmp = b->array[0];
+    while (i < b->elem_count)
     {
-        temp = b[1];
-        i = 1;
-        while (i < b[0])
-        {
-            b[i] = b[i + 1];
-            i++;
-        }
-        b[b[0]] = temp;
+        b->array[i] = b->array[i + 1];
+        i++;
     }
+    b->array[b->elem_count - 1] = tmp;
     ft_putstr("rb\n");
 }
 
-void    rr(int *a, int *b)
-{
-    ra(a);
-    rb(a, b);
-    ft_putstr("rr\n");
-}
+// void    rr(int *a, int *b)
+// {
+//     ra(a);
+//     rb(a, b);
+//     ft_putstr("rr\n");
+// }
 
-void    rra(int *a)
-{
-    int i;
-    int tmp;
+// void    rra(int *a)
+// {
+//     int i;
+//     int tmp;
     
-    i = 0;
-    if (a[0] > 1)
-    {
-        tmp = a[0];
-        while (i > 1)
-        {
-            a[i] = a[i - 1];
-            i--;
-        }
-        a[1] = tmp;
-    }
-    ft_putstr("rra\n");
+//     i = 0;
+//     if (a[0] > 1)
+//     {
+//         tmp = a[0];
+//         while (i > 1)
+//         {
+//             a[i] = a[i - 1];
+//             i--;
+//         }
+//         a[1] = tmp;
+//     }
+//     ft_putstr("rra\n");
 
-}
+// }
 
-void    rrb(int *a, int *b)
-{
-    int i;
-    int temp;
+// void    rrb(int *a, int *b)
+// {
+//     int i;
+//     int temp;
 
-    if (b[0] > 1)
-    {
-        temp = b[b[0]];
-        i = b[0];
-        while (i > 1)
-        {
-            b[i] = b[i - 1];
-            i--;
-        }
-        b[1] = temp;
-    }
-    ft_putstr("rrb\n");
-}
+//     if (b[0] > 1)
+//     {
+//         temp = b[b[0]];
+//         i = b[0];
+//         while (i > 1)
+//         {
+//             b[i] = b[i - 1];
+//             i--;
+//         }
+//         b[1] = temp;
+//     }
+//     ft_putstr("rrb\n");
+// }

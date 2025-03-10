@@ -13,23 +13,43 @@
 
 
 #include "push_swap.h"
-
-char	*ft_strjoin(char const *s1, char const *s2)
+/*
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ptr;
 	size_t	len;
 
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	ptr = malloc(sizeof(char) * len);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	ptr = malloc(sizeof(char) * (len + len + 1));
 	if (ptr == NULL)
 		return (NULL);
-	ptr[len - 1] = '\0';
-	ft_memcpy(ptr, s1, ft_strlen(s1));
-	ft_memcpy(ptr + ft_strlen(s1), s2, ft_strlen(s2));
+	ptr[len + len] = '\0';
+	ptr[len + len - 1] = ' ';
+	ft_memcpy(ptr, s1, (ft_strlen(s1) + (ft_strlen(s1) - 1)));
+	ft_memcpy(ptr + ft_strlen(s1), s2, ft_strlen(s2) + (ft_strlen(s2) - 1));
 	return (ptr);
+}*/
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t	i;
+	char	*new_s;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	new_s = malloc((sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (new_s == 0)
+		return (0);
+	while (*s1)
+		new_s[i++] = *s1++;
+	while (*s2)
+		new_s[i++] = *s2++;
+	new_s[i] = 0;
+	return (new_s);
 }
 
-size_t	count_word(const char *p, char c)
+size_t	count_word(char *p, char c)
 {
 	size_t	i;
 	size_t	len;
@@ -134,18 +154,15 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int	execution(int *list_a, int argc, int *list_b)
+void	execution(t_stack *a, int argc, t_stack *b)
 {	
-	int i;
-	
-	i = 0;
-	while (i < argc - 1)
+	// is_three(a->array, argc);
+	int i = 0;
+	while (i < a->elem_count)
 	{
-		printf("TESTTEST\n");
-		write(1, &list_a[i], 1);
-		i++;
+		printf("%d\n", a->array[i++]);
 	}
-	is_three(list_a, argc);
-	is_raddix(list_a, list_b, argc);
-	return 0;
+    radix_sort_push_swap(a, b);
+
+	return ;
 }

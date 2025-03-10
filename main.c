@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int		ft_atoi(const char *str)
+int ft_atoi(char *str)
 {
 	// error caseleri düzeltilecek
 	int neg;
@@ -22,8 +22,7 @@ int		ft_atoi(const char *str)
 	i = 0;
 	neg = 1;
 	num = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
-			|| str[i] == '\f' || str[i] == '\r')
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -39,7 +38,7 @@ int		ft_atoi(const char *str)
 	return (num * neg);
 }
 
-char	*convert_to_int(char *str, int *ptr)
+char *convert_to_int(char *str, int *ptr)
 {
 	int i;
 	int j;
@@ -64,73 +63,108 @@ char	*convert_to_int(char *str, int *ptr)
 
 int element_counter(char *str)
 {
-    int i;
-    int count;
+	int i;
+	int count;
 
-    count = 0;
-    i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	count = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		{
-            i++;
+			i++;
 			if (str[i] != '\0' && !(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
 				count++;
 		}
-		else{
+		else
+		{
 			i++;
 		}
-		
-    }	
+	}
 	return (count + 1);
 }
 
-void	initial(int argc, char **argv)
+void initial(int argc, char **argv)
 {
 	if (argc < 2)
-        return ;
-    int	elements;
-    int	*ptr;
-	int	i;
-	char	**pointer;
-	t_stack *stack;
+		return;
+	else
+	{
+		t_stack *stack_a;
+		t_stack *stack_b;
+		char *ptr;
+		char **pointer;
+		int i;
+		int elements;
 
-	i = 1;
-	stack = malloc(sizeof(stack));
-	if (!stack)
-	return ;
-	// if (argc == 2)
-	// {
-	// 	elements = count_word(argv[1], ' ');
-	// 	argc = elements;
-	// }
-	stack->stack_a = (int*)malloc((argc - 1) * sizeof(int));
-	ft_strjoin(argv, stack->stack_a);
-	ft_split();
 
-	// if (!stack->stack_a)
-	// 	return ;
-	// while (i < argc)
-	// {
-	// 	stack->stack_a[i - 1] = ft_atoi(argv[i]);
-	// 	i++;
-	// }
-	// execution(stack->stack_a, argc, stack->stack_b);
+		i = 1;
+		ptr = "";
+		while (i < argc && argv && argv[i])
+		{
+			ptr = ft_strjoin(ptr, argv[i]);
+			ptr = ft_strjoin(ptr, " ");
+			i++;
+		}
+		i = 0;
+		pointer = ft_split(ptr, ' ');
+		// i = -1;
+		// while (pointer[++i])
+		// {
+		// 	printf("pointer: %s\n", pointer[i]);
+		// }
+		// exit(1);
+		stack_a = malloc(sizeof(t_stack *));
+		stack_b = malloc(sizeof(t_stack *));
+		if (!stack_a)
+		{
+			free(stack_a);
+			return;
+		}
+		if (!stack_b)
+		{
+			free(stack_b);
+			return;
+		}
+		stack_a->elem_count = count_word(ptr, ' ');
+		printf("SENBUSIPORUYAPIYONHE\n");
+		printf("TESTSBIR\n");
+
+		stack_a->array = malloc((stack_a->elem_count) * sizeof(int));
+		stack_b->array = malloc((stack_a->elem_count) * sizeof(int));
+		if (!(stack_a->array) || !(stack_b->array))
+		{
+		printf("TESTSBIR\n");
+
+			free(stack_a->array);
+			free(stack_b->array);
+			free(stack_a);
+			free(stack_b);
+		}
+		printf("TESTSBIR\n");
+
+		while (i < stack_a->elem_count)
+		{
+			stack_a->array[i] = ft_atoi(pointer[i]);
+			printf("ÇEVİRDİĞİM %d. SAYI = %d\n", i, stack_a->array[i]);
+			i++;
+		}
+		stack_b->elem_count = 0;
+		execution(stack_a, argc, stack_b);
+	}
 }
 
 int main(int argc, char **argv)
 {
-    if (argc < 2)
-         return (0);
-	// int	i = 0;
-	// int	*test = [20, 10];
-	// sa(test);
-	// while (test[i] != '\0')
-	// {
-	// 	printf("%d.eleman = %d", i, test[i]);
-	// 	i++;
-	// }
-	initial(argc, argv);
-	ft_putstr("\n");
-    return (0);
+	if (argc < 2)
+		return (0);
+	else
+	{
+		initial(argc, argv);
+		ft_putstr("\n");
+	}
+	return (0);
 }
+
+// pb koşulu çözülecek.
+// ./a.out 11 57 36 44 20 19 4
